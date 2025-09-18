@@ -12,5 +12,9 @@ if ($num == 6)
 {
     echo "<br/>CAMPEÓN";
 }
+else 
+{
+    echo "<br/>CHUFLA!";
+}
 
 ?>
