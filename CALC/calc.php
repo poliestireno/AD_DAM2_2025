@@ -29,7 +29,7 @@ if (isset($_POST['op'])) // si no es la primera vez
             default:
                 echo "error de operación, elige una operación";
                 break;
-            }
+        }
     }
 }
 ?>
