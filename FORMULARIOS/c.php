@@ -23,11 +23,11 @@ var_export($_POST);
 
   <div class="mb-3">
     <label class="form-label">N+1</label>
-    <input value="<?php echo $_POST['numero']+ $_POST['inc'] ?>" type="number" class="form-control" name="numero">
+    <input value="<?php echo $_POST['numero']+ $_POST['inc'] ?>" type="number" class="form-control" >
   </div>
   <div class="mb-3">
     <label class="form-label">C"HOLA"</label>
-    <input value="<?php echo $_POST['frase'].$_POST['fraseMia'] ?>" type="text" class="form-control" name="frase">
+    <input value="<?php echo $_POST['frase'].$_POST['fraseMia'] ?>" type="text" class="form-control" >
   </div>
 
   </body>
