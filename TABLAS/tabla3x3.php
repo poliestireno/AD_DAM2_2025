@@ -12,24 +12,36 @@
 <div class="container m-5">
 
 </div>
-hacerlo con for
 <table class="table table-bordered border-primary">
-    <tr>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-    </tr>
-    <tr>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-    </tr>
-    <tr>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-      <td><?php echo rand(1,9)?></td>
-    </tr>
+	<?php
+    	$acumulador = 0;
+        $acumDiagonal = 0;
+        $acumDiagonalInv = 0;
+        $tam = 15;
+        for ($i=0;$i<$tam;$i++)
+        {
+        	echo "<tr>";
+            for ($j=0;$j<$tam;$j++)
+            {
+            	$valor = rand(1,9);
+                $acumulador+=$valor;
+                echo "<td>".$valor."</td>";
+                if ($j==$i)
+                {
+                	$acumDiagonal+=$valor;
+                }
+                if ($i+$j==($tam-1))
+                {
+                	$acumDiagonalInv+=$valor;
+                }
+            }
+            echo "</tr>";
+       	}   
+    ?>
 </table>
+<?php echo "<h1>".$acumulador."</h1>"?>
+<?php echo "<h1> La diagonal ".$acumDiagonal."</h1>"?>
+<?php echo "<h1> La diagonal Inv ".$acumDiagonalInv."</h1>"?>
 </body>
   </body>
 </html>
