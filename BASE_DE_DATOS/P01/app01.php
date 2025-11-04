@@ -7,7 +7,8 @@ $miConexion = conectarDB();
 //var_export($miConexion);
 
 $vectorFilas = getTodosJuegos($miConexion);
-//var_export($vectorFilas);
+$vectorFilasCategoria = getJuegosPorCategoria($miConexion, "RPG");
+var_export($vectorFilasCategoria);
 
 /*
 foreach($vectorFilas as $miFila)
