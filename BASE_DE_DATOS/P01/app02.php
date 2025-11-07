@@ -1,25 +1,8 @@
 <?php
-
 require_once("dbutils.php");
-
 $miConexion = conectarDB();
-
-//var_export($miConexion);
-
-$vectorFilas = getTodosJuegos($miConexion);
-$vectorFilasCategoria = getJuegosPorCategoria($miConexion, "RPG");
-var_export($vectorFilasCategoria);
-
-/* 
-foreach($vectorFilas as $miFila)
-{
-    echo " el nombre es:".$miFila['NOMBRE']." y lo otro:".$miFila['DESCRIPCION'].$miFila['CATEGORIA']."<br/>";
-}*/
-
-
-
+$vectorFilas =  getJuegosPorCategoria($miConexion,$_POST['categoria']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +14,7 @@ foreach($vectorFilas as $miFila)
 
 </head>
 <body>
+    <h1>La categoría elegida es <?php echo $_POST['categoria']?></h1>
    <table class="table">
   <thead>
     <tr>
@@ -45,18 +29,21 @@ foreach($vectorFilas as $miFila)
       <td><?php echo $miFila['DESCRIPCION'].$miFila['CATEGORIA']?></td>
     </tr>
 <?php }?>
-
   </tbody>
 </table> 
 
-<form action="app02.php" method="post">
 
-  Categoria:
+<form action="app03.php" method="post">
+
+    Categoria:
   <input type="text" name="categoria">
+    Nombre:
+  <input type="text" name="nombre">
 
   <input type="submit" value="Vamos!!"/>
 
 </form>
+
 
 </body>
 </html>

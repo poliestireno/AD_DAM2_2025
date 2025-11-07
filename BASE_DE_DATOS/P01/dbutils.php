@@ -48,7 +48,26 @@ function getJuegosPorCategoria($db, $nombre_categoria)
     }
     catch(PDOException $ex)
     {
-        echo "Error en getTodosJuegos ".$ex->getMessage();
+        echo "Error en getJuegosPorCategoria ".$ex->getMessage();
+    }
+    return $vectorTotal;
+}
+function getJuegosPorCategoriaYNombre($db, $nombre_categoria,$nombre_entrada)
+{
+    $vectorTotal = array();
+    try
+    {
+        $query= "SELECT * FROM JUEGOS WHERE CATEGORIA=:CATEGORIA AND NOMBRE=:NOMBRE";
+        $pstmt = $db->prepare($query,array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $pstmt->execute(array(':CATEGORIA' => $nombre_categoria,':NOMBRE' => $nombre_entrada));
+        while ($fila = $pstmt->fetch(PDO::FETCH_ASSOC))
+        {
+            $vectorTotal[] = $fila;
+        }
+    }
+    catch(PDOException $ex)
+    {
+        echo "Error en getJuegosPorCategoria ".$ex->getMessage();
     }
     return $vectorTotal;
 }
