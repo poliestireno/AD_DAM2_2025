@@ -71,4 +71,37 @@ function getJuegosPorCategoriaYNombre($db, $nombre_categoria,$nombre_entrada)
     }
     return $vectorTotal;
 }
+function contarTodosJuegos($db)
+{
+    try
+    {
+        $stmt = $db->query("SELECT COUNT(*) TOTAL FROM JUEGOS");
+        $fila = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    catch(PDOException $ex)
+    {
+        echo "Error en contarTodosJuegos ".$ex->getMessage();
+    }
+    return $fila['TOTAL'];
+}
+
+function insertarJuego($db,$nombre,$descripcion,$categoria)
+{
+    $sqlInsert = "INSERT INTO JUEGOS(NOMBRE, DESCRIPCION, CATEGORIA) 
+                    VALUES (:NOMBRE, :DESCRIPCION, :CATEGORIA)";
+    try
+    {
+        $stmt = $db->prepare($sqlInsert);
+        $stmt->bindParam(":NOMBRE",$nombre);
+        $stmt->bindParam(":DESCRIPCION",$descripcion);
+        $stmt->bindParam(":CATEGORIA",$categoria);
+        $stmt->execute();
+    }
+    catch(PDOException $ex)
+    {
+        echo "Error en insertarJuego ".$ex->getMessage();
+    }
+    return $db->lastInsertId();
+}
+
 ?>
