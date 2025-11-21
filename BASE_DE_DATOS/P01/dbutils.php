@@ -91,6 +91,7 @@ function insertarJuego($db,$nombre,$descripcion,$categoria)
                     VALUES (:NOMBRE, :DESCRIPCION, :CATEGORIA)";
     try
     {
+                
         $stmt = $db->prepare($sqlInsert);
         $stmt->bindParam(":NOMBRE",$nombre);
         $stmt->bindParam(":DESCRIPCION",$descripcion);
@@ -102,6 +103,21 @@ function insertarJuego($db,$nombre,$descripcion,$categoria)
         echo "Error en insertarJuego ".$ex->getMessage();
     }
     return $db->lastInsertId();
+}
+
+function modificarJuegoDescCatPorNombre($db,$descripcion,$categoria,$nombre)
+{
+    $sqlUpdate = "UPDATE JUEGOS SET DESCRIPCION=:DESCRIPCION,CATEGORIA=:CATEGORIA WHERE NOMBRE=:NOMBRE";
+    try
+    {
+       $pstmt = $db->prepare($sqlUpdate);
+       $pstmt->execute(array(':CATEGORIA' => $categoria,':DESCRIPCION' => $descripcion,':NOMBRE' => $nombre));
+    }
+    catch(PDOException $ex)
+    {
+        echo "Error en modificarJuegoDescCatPorNombre ".$ex->getMessage();
+    }
+    return $pstmt->rowCount();
 }
 
 ?>
