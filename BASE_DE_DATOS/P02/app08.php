@@ -1,7 +1,6 @@
 <?php
 require_once("dbutils.php");
 $miConexion = conectarDB();
-$total_juegos = contarTodosJuegos($miConexion);
 ?>
 
 <!DOCTYPE html>
@@ -16,20 +15,15 @@ $total_juegos = contarTodosJuegos($miConexion);
 
 </head>
 <body>
-    <h2>EL NÚMERO TOTAL DE JUEGOS ACTUALMENTE ES <?php echo $total_juegos?></h2>
 
-    <form action="app05.php" method="post">
+    <form action="app09.php" method="post">
         <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input type="text" class="form-control" name="nombre">
+            <label class="form-label">Nombre Coche</label>
+            <input type="text" class="form-control" name="nombreCoche">
         </div>
         <div class="mb-3">
-            <label class="form-label">Descripción</label>
-            <input type="text" class="form-control" name="desc">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Categoría</label>
-            <input type="text" class="form-control" name="categoria">
+            <label class="form-label">Nombre Marca</label>
+            <input type="text" class="form-control" name="nombreMarca">
         </div>
         <button type="submit" class="btn btn-primary">Insertar</button>
     </form>

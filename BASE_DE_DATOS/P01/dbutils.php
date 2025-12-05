@@ -120,4 +120,22 @@ function modificarJuegoDescCatPorNombre($db,$descripcion,$categoria,$nombre)
     return $pstmt->rowCount();
 }
 
+function borrarJuegoNombre($db,$nombre)
+{
+    $sqlDelete = "DELETE FROM JUEGOS WHERE NOMBRE=:NOMBRE";
+    try
+    {
+       $pstmt = $db->prepare($sqlDelete);
+       $pstmt->execute(array(':NOMBRE' => $nombre));
+    }
+    catch(PDOException $ex)
+    {
+        echo "Error en borrarJuegoNombre ".$ex->getMessage();
+    }
+    return $pstmt->rowCount();
+}
+
+
+
+
 ?>

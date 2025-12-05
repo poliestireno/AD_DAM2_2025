@@ -13,36 +13,25 @@
 </head>
 <body>
 
-    <form action="app06.php" method="post">
+    <form action="app07.php" method="post">
         <div class="mb-3">
-            <label class="form-label">Modificar Descripción</label>
-            <input type="text" class="form-control" name="desc">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Modificar Categoría</label>
-            <input type="text" class="form-control" name="categoria">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">En función de Nombre</label>
+            <label class="form-label">Borrar en función de Nombre</label>
             <input type="text" class="form-control" name="nombre">
         </div>
-        <button name="modificar" type="submit" class="btn btn-primary">Modificar</button>
+        <button name="borrar" type="submit" class="btn btn-primary">Borrar</button>
     </form>
 </body>
 </html>
 
 <?php
 //var_export($_POST);
-if (isset($_POST['modificar']))
+if (isset($_POST['borrar']))
 {
     require_once("dbutils.php");
     $miConexion = conectarDB();
-$updateOK = modificarJuegoDescCatPorNombre($miConexion,$_POST['desc'],$_POST['categoria'],$_POST['nombre']);
+    borrarJuegoNombre($miConexion,$_POST['nombre']);
     //echo "El update es ".$updateOK;
-
-echo '<div class="alert alert-secondary" role="alert">',($updateOK==0)?'No actualizado':'Sí actualizado','</div>';
-
-
+    echo '<div class="alert alert-secondary" role="alert">BORRADO OK</div>';
 }
 
 
