@@ -24,8 +24,12 @@ var player;
 var cursors;
 var bombs;
 var stars;
+var gameOver = false;
+var gameOverText;
 var score = 0;
 var scoreText;
+var level = 1;
+var levelText;
 
 function preload ()
 {
@@ -89,6 +93,7 @@ function create ()
 
     });
     this.physics.add.collider(stars, platforms);
+
     this.physics.add.overlap(player, stars, collectStar, null, this);
 
     scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -96,6 +101,8 @@ function create ()
     this.physics.add.collider(bombs, platforms);
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 
+    levelText = this.add.text(400, 16, `Nivel:  ${level}`, { fontSize: '32px', fill: '#00000' });
+    
 }
 function hitBomb (player, bomb)
 {
@@ -110,14 +117,16 @@ function hitBomb (player, bomb)
 function collectStar (player, star)
 {
     star.disableBody(true, true);
+    
     score += 10;
+    
     scoreText.setText('Score: ' + score);
     if (stars.countActive(true) === 0)
     {
         stars.children.iterate(function (child) {
 
             child.enableBody(true, child.x, 0, true, true);
-
+            
         });
 
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
@@ -126,11 +135,14 @@ function collectStar (player, star)
         bomb.setBounce(1);
         bomb.setCollideWorldBounds(true);
         bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-
+        level += 1
+        levelText.setText(`Nivel : ${level}`)
     }
 }
-function update ()
-{
+function update (){
+    if (gameOver){
+        gameOverText = this.add.text(300, 300, 'Game Over', { fontSize: '64px', fill: '#ff0000' });
+    }
     if (cursors.left.isDown)
     {
         player.setVelocityX(-160);
@@ -154,4 +166,6 @@ function update ()
     {
         player.setVelocityY(-330);
     }
+
+    
 }
